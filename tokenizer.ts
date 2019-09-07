@@ -54,7 +54,7 @@ export class Tokenizer implements Iterator<Token> {
             for (const rule of this.rules) {
                 const match = this.match(
                     this.source.substring(this.index),
-                    rule.regex
+                    rule.pattern
                 );
 
                 if (match) {
@@ -71,12 +71,21 @@ export class Tokenizer implements Iterator<Token> {
         }
     }
 
-    private match(text: string, regex: RegExp): string {
-        const match = text.match(regex);
-        if (!match) return;
-        if (match.index !== 0) return;
+    private match(text: string, pattern: RegExp | string): string {
+        let match: string;
+        
+        if (typeof pattern === "string") {
+            match = text.startsWith(pattern) ? pattern : undefined;
+            if (!match) return;
+        } else {
+            const matchArray = text.match(pattern);
+            if (!matchArray) return;
+            if (matchArray.index !== 0) return;
 
-        this._index += match[0].length;
-        return match[0];
+            match = matchArray[0];
+        }
+
+        this._index += match.length;
+        return match;
     }
 }

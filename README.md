@@ -6,12 +6,13 @@ A simple tokenizer for deno.
 
 ## Example
 ```TypeScript
-import { Tokenizer } from "https://denopkg.com/eliassjogreen/deno_tokenizer/mod.ts";
+import { Tokenizer } from "./mod.ts";
 
-const tokenizer = new Tokenizer("abc 123", [
-    { name: "WORD",   regex: /[a-zA-Z]+/ },
-    { name: "DIGITS", regex: /\d+/ },
-    { name: "SPACE",  regex: / /, ignore: true }, // Or leave name blank and remove "ignore: true"
+const tokenizer = new Tokenizer("abc 123 HELLO", [
+    { name: "HELLO",  pattern: "HELLO" },
+    { name: "WORD",   pattern: /[a-zA-Z]+/ },
+    { name: "DIGITS", pattern: /\d+/ },
+    { name: "SPACE",  pattern: / /, ignore: true }, // Or leave name blank and remove "ignore: true"
 ]);
 
 while (!tokenizer.done) {
@@ -20,4 +21,5 @@ while (!tokenizer.done) {
 
 // => { name: "WORD", value: "abc" }
 // => { name: "DIGITS", value: "123" }
+// => { name: "WORD", value: "HELLO" }
 ```
