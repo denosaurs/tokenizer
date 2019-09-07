@@ -1,0 +1,6 @@
+on: [push]
+jobs:
+  test:
+    steps:
+      uses: denolib/deno-action@0.17.0
+      run: run test.ts
