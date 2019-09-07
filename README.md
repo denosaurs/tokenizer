@@ -22,7 +22,7 @@ console.log([...tokenizer]);
 //     console.log(tokenizer.next().value);
 // }
 
-// => { name: "HELLO", value: "HELLO" }
 // => { name: "WORD", value: "abc" }
 // => { name: "DIGITS", value: "123" }
+// => { name: "HELLO", value: "HELLO" }
 ```
