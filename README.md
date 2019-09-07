@@ -1,5 +1,5 @@
 # Deno_Tokenizer
-[![Actions Status](https://github.com/eliassjogreen/Deno_Tokenizer/workflows/Test/badge.svg)](https://github.com/eliassjogreen/Deno-Tokenizer/actions)
+[![Actions Status](https://github.com/eliassjogreen/deno-tokenizer/workflows/Tests/badge.svg)](https://github.com/eliassjogreen/deno-tokenizer/actions)
 [![GitHub license](https://img.shields.io/github/license/eliassjogreen/deno-tokenizer)](https://github.com/eliassjogreen/deno-tokenizer)
 
 A simple tokenizer for deno.
