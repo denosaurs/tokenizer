@@ -17,7 +17,7 @@ const tokenizer = new Tokenizer("abc 123 HELLO", [
 
 // The first option:
 console.log([...tokenizer]);
-// The second option
+// The second option:
 // while (!tokenizer.done) {
 //     console.log(tokenizer.next().value);
 // }
