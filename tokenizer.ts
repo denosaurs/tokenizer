@@ -29,11 +29,16 @@ export class Tokenizer implements Iterator<Token> {
         }
 
         const token = this.scan();
-        
+
         if (token) {
             return {
                 done: false,
                 value: token
+            };
+        } else if (this.done) {
+            return {
+                done: true,
+                value: undefined
             };
         }
 
@@ -43,18 +48,23 @@ export class Tokenizer implements Iterator<Token> {
     }
 
     private scan(): Token {
-        for (const rule of this.rules) {
-            const match = this.match(this.source.substring(this.index), rule.regex);
-
-            if (rule.ignore || rule.name === "") {
-                return this.scan();
-            }
+        if (this.done) {
+            return;
+        } else for (const rule of this.rules) {
+            const match = this.match(
+                this.source.substring(this.index),
+                rule.regex
+            );
 
             if (match) {
-                return {
-                    name: rule.name,
-                    value: match
-                };
+                if (rule.ignore || rule.name === "") {
+                    return this.scan();
+                } else {
+                    return {
+                        name: rule.name,
+                        value: match
+                    };
+                }
             }
         }
     }
