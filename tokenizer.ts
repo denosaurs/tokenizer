@@ -1,7 +1,7 @@
 import { Rule } from "./rule.ts";
 import { Token } from "./token.ts";
 
-export class Tokenizer implements Iterator<Token> {
+export class Tokenizer implements IterableIterator<Token> {
     private _index: number = 0;
 
     public readonly source: string;
@@ -73,7 +73,7 @@ export class Tokenizer implements Iterator<Token> {
 
     private match(text: string, pattern: RegExp | string): string {
         let match: string;
-        
+
         if (typeof pattern === "string") {
             match = text.startsWith(pattern) ? pattern : undefined;
             if (!match) return;
@@ -87,5 +87,9 @@ export class Tokenizer implements Iterator<Token> {
 
         this._index += match.length;
         return match;
+    }
+
+    [Symbol.iterator](): IterableIterator<Token> {
+        return this;
     }
 }

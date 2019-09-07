@@ -15,9 +15,12 @@ const tokenizer = new Tokenizer("abc 123 HELLO", [
     { name: "SPACE",  pattern: / /, ignore: true }, // Or leave name blank and remove "ignore: true"
 ]);
 
-while (!tokenizer.done) {
-    console.log(tokenizer.next().value);
-}
+// Either the following:
+console.log([...tokenizer]);
+// Or the following while loop:
+// while (!tokenizer.done) {
+//     console.log(tokenizer.next().value);
+// }
 
 // => { name: "WORD", value: "abc" }
 // => { name: "DIGITS", value: "123" }
