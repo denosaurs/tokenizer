@@ -78,6 +78,110 @@ test(function matchesMultipleString() {
     });
 });
 
+test(function matchesSingleFunctionPattern() {
+    const tokenizer = new Tokenizer('"0123456789 abcdef"', [
+        {
+            name: "STRING",
+            pattern: (text: string) => {
+                if (text.startsWith('"')) {
+                    let i = 1;
+                    let out = '"';
+
+                    while (i < text.length && text.charAt(i) !== '"') {
+                        out += text.charAt(i);
+                        i++;
+                    }
+
+                    out += '"';
+                    return out;
+                } else {
+                    return undefined;
+                }
+            }
+        }
+    ]);
+
+    assertEquals(tokenizer.next(), {
+        done: false,
+        value: {
+            name: "STRING",
+            value: "\"0123456789 abcdef\"",
+            position: { start: 0, end: 19 }
+        }
+    });
+    assertEquals(tokenizer.next(), {
+        done: true,
+        value: undefined
+    });
+});
+
+test(function matchesMultipleFunctionPattern() {
+    const tokenizer = new Tokenizer('"0123456789 abcdef" "0123456789 abcdef"', [
+        {
+            name: "STRING",
+            pattern: (text: string) => {
+                if (text.startsWith('"')) {
+                    let i = 1;
+                    let out = '"';
+
+                    while (i < text.length && text.charAt(i) !== '"') {
+                        out += text.charAt(i);
+                        i++;
+                    }
+
+                    out += '"';
+                    return out;
+                } else {
+                    return undefined;
+                }
+            }
+        },
+        {
+            name: "SPACE",
+            pattern: (text: string) => {
+                let i = 0;
+                let out = '';
+
+                while (i < text.length && text.charAt(i) === ' ') {
+                    out += text.charAt(i);
+                    i++;
+                }
+
+                return out;
+            }
+        },
+    ]);
+
+    assertEquals(tokenizer.next(), {
+        done: false,
+        value: {
+            name: "STRING",
+            value: "\"0123456789 abcdef\"",
+            position: { start: 0, end: 19 }
+        }
+    });
+    assertEquals(tokenizer.next(), {
+        done: false,
+        value: {
+            name: "SPACE",
+            value: " ",
+            position: { start: 19, end: 20 }
+        }
+    });
+    assertEquals(tokenizer.next(), {
+        done: false,
+        value: {
+            name: "STRING",
+            value: "\"0123456789 abcdef\"",
+            position: { start: 20, end: 39 }
+        }
+    });
+    assertEquals(tokenizer.next(), {
+        done: true,
+        value: undefined
+    });
+});
+
 test(function ignoresSingleRegex() {
     const tokenizer = new Tokenizer("0123456789", [
         { name: "", pattern: /\d+/ }
@@ -136,6 +240,94 @@ test(function ignoresMultipleString() {
     const tokenizer = new Tokenizer("0123456789 0123456789", [
         { name: "", pattern: "0123456789" },
         { name: "", pattern: " " }
+    ]);
+
+    assertEquals(tokenizer.next(), {
+        done: true,
+        value: undefined
+    });
+    assertEquals(tokenizer.next(), {
+        done: true,
+        value: undefined
+    });
+    assertEquals(tokenizer.next(), {
+        done: true,
+        value: undefined
+    });
+    assertEquals(tokenizer.next(), {
+        done: true,
+        value: undefined
+    });
+});
+
+test(function ignoresSingleFunctionPattern() {
+    const tokenizer = new Tokenizer('"0123456789 abcdef"', [
+        {
+            name: "",
+            pattern: (text: string) => {
+                if (text.startsWith('"')) {
+                    let i = 1;
+                    let out = '"';
+
+                    while (i < text.length && text.charAt(i) !== '"') {
+                        out += text.charAt(i);
+                        i++;
+                    }
+
+                    out += '"';
+                    return out;
+                } else {
+                    return undefined;
+                }
+            }
+        }
+    ]);
+
+    assertEquals(tokenizer.next(), {
+        done: true,
+        value: undefined
+    });
+    assertEquals(tokenizer.next(), {
+        done: true,
+        value: undefined
+    });
+});
+
+test(function ignoresMultipleFunctionPattern() {
+    const tokenizer = new Tokenizer('"0123456789 abcdef" "0123456789 abcdef"', [
+        {
+            name: "",
+            pattern: (text: string) => {
+                if (text.startsWith('"')) {
+                    let i = 1;
+                    let out = '"';
+
+                    while (i < text.length && text.charAt(i) !== '"') {
+                        out += text.charAt(i);
+                        i++;
+                    }
+
+                    out += '"';
+                    return out;
+                } else {
+                    return undefined;
+                }
+            }
+        },
+        {
+            name: "",
+            pattern: (text: string) => {
+                let i = 0;
+                let out = '';
+
+                while (i < text.length && text.charAt(i) === ' ') {
+                    out += text.charAt(i);
+                    i++;
+                }
+
+                return out;
+            }
+        },
     ]);
 
     assertEquals(tokenizer.next(), {

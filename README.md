@@ -16,7 +16,8 @@ const tokenizer = new Tokenizer("abc 123 HELLO", [
 ]);
 
 // The first option:
-// console.log([...tokenizer]);
+console.log(...tokenizer);
+
 // The second option:
 // while (!tokenizer.done) {
 //     console.log(tokenizer.next().value);
@@ -34,6 +35,7 @@ const tokenizer = new Tokenizer("abc 123 HELLO", [
 ```
 
 ## TODO
-- [ ] Custom patterns using functions
+- [x] Custom patterns using functions
 - [x] Add position information to Token
 - [ ] Better error handling
+- [ ] Documentation

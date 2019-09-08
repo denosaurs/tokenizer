@@ -1,5 +1,7 @@
+import { Pattern } from "./pattern.ts";
+
 export interface Rule {
     name: string;
-    pattern: RegExp | string;
+    pattern: Pattern;
     ignore?: boolean;
 }

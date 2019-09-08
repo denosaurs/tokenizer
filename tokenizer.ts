@@ -1,5 +1,6 @@
 import { Rule } from "./rule.ts";
 import { Token } from "./token.ts";
+import { Pattern } from "./pattern.ts";
 
 export class Tokenizer implements IterableIterator<Token> {
     private _index: number = 0;
@@ -77,11 +78,14 @@ export class Tokenizer implements IterableIterator<Token> {
         }
     }
 
-    private match(text: string, pattern: RegExp | string): string {
+    private match(text: string, pattern: Pattern): string {
         let match: string;
 
         if (typeof pattern === "string") {
             match = text.startsWith(pattern) ? pattern : undefined;
+            if (!match) return;
+        } else if (typeof pattern === "function") {
+            match = pattern(text);
             if (!match) return;
         } else {
             const matchArray = text.match(pattern);
