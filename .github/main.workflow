@@ -5,5 +5,5 @@ workflow "Tests" {
 
 action "test all" {
   uses = "denolib/deno-action@0.17.0"
-  args = "test *_test.ts -A"
+  args = "test *_test.ts --allow-all"
 }
