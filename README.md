@@ -31,3 +31,8 @@ console.log([...tokenizer]);
 // => { name: "HELLO", value: "HELLO" }
 
 ```
+
+## TODO
+- [ ] Custom Patterns using functions
+- [ ] Add location information to Token
+- [ ] Better error handling
