@@ -33,6 +33,6 @@ console.log([...tokenizer]);
 ```
 
 ## TODO
-- [ ] Custom Patterns using functions
+- [ ] Custom patterns using functions
 - [ ] Add location information to Token
 - [ ] Better error handling
