@@ -171,5 +171,3 @@ test(function testIterable() {
         ]
     );
 });
-
-runTests();
