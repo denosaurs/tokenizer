@@ -1,4 +1,4 @@
-workflow "Main" {
+workflow "Tests" {
   resolves = ["test all"]
   on = "push"
 }
