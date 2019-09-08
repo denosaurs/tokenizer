@@ -1,9 +1,9 @@
 workflow "Tests" {
   on = "push"
-  resolves = ["run test.ts"]
+  resolves = ["test"]
 }
 
-action "run test.ts" {
+action "test" {
   uses = "denolib/deno-action@0.17.0"
-  args = "run test.ts"
+  args = "test"
 }

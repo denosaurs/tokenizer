@@ -1,7 +1,7 @@
 import { runTests, test } from "https://deno.land/x/std/testing/mod.ts";
 import { assertEquals } from "https://deno.land/std/testing/asserts.ts";
 
-import { Rule, Token, Tokenizer } from "./mod.ts";
+import { Tokenizer } from "./mod.ts";
 
 test(function matchesSingleRegex() {
     const tokenizer = new Tokenizer("0123456789", [
