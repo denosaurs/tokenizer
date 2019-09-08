@@ -1,5 +1,5 @@
 export interface Rule {
-    pattern: RegExp | string;
     name: string;
+    pattern: RegExp | string;
     ignore?: boolean;
 }

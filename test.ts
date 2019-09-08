@@ -10,7 +10,7 @@ test(function matchesSingleRegex() {
 
     assertEquals(tokenizer.next(), {
         done: false,
-        value: { name: "DIGITS", value: "0123456789" }
+        value: { name: "DIGITS", value: "0123456789", position: { start: 0, end: 10 } }
     });
     assertEquals(tokenizer.next(), {
         done: true,
@@ -26,15 +26,15 @@ test(function matchesMultipleRegex() {
 
     assertEquals(tokenizer.next(), {
         done: false,
-        value: { name: "DIGITS", value: "0123456789" }
+        value: { name: "DIGITS", value: "0123456789", position: { start: 0, end: 10 } }
     });
     assertEquals(tokenizer.next(), {
         done: false,
-        value: { name: "SPACE", value: " " }
+        value: { name: "SPACE", value: " ", position: { start: 10, end: 11 } }
     });
     assertEquals(tokenizer.next(), {
         done: false,
-        value: { name: "DIGITS", value: "0123456789" }
+        value: { name: "DIGITS", value: "0123456789", position: { start: 11, end: 21 } }
     });
     assertEquals(tokenizer.next(), { done: true, value: undefined });
 });
@@ -46,7 +46,7 @@ test(function matchesSingleString() {
 
     assertEquals(tokenizer.next(), {
         done: false,
-        value: { name: "DIGITS", value: "0123456789" }
+        value: { name: "DIGITS", value: "0123456789", position: { start: 0, end: 10 } }
     });
     assertEquals(tokenizer.next(), {
         done: true,
@@ -62,15 +62,15 @@ test(function matchesMultipleString() {
 
     assertEquals(tokenizer.next(), {
         done: false,
-        value: { name: "DIGITS", value: "0123456789" }
+        value: { name: "DIGITS", value: "0123456789", position: { start: 0, end: 10 } }
     });
     assertEquals(tokenizer.next(), {
         done: false,
-        value: { name: "SPACE", value: " " }
+        value: { name: "SPACE", value: " ", position: { start: 10, end: 11 } }
     });
     assertEquals(tokenizer.next(), {
         done: false,
-        value: { name: "DIGITS", value: "0123456789" }
+        value: { name: "DIGITS", value: "0123456789", position: { start: 11, end: 21 } }
     });
     assertEquals(tokenizer.next(), {
         done: true,
@@ -165,9 +165,9 @@ test(function testIterable() {
     assertEquals(
         [...tokenizer],
         [
-            { name: "DIGITS", value: "0123456789" },
-            { name: "SPACE", value: " " },
-            { name: "DIGITS", value: "0123456789" }
+            { name: "DIGITS", value: "0123456789", position: { start: 0, end: 10 } },
+            { name: "SPACE", value: " ", position: { start: 10, end: 11 } },
+            { name: "DIGITS", value: "0123456789", position: { start: 11, end: 21 } }
         ]
     );
 });

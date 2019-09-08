@@ -52,10 +52,12 @@ export class Tokenizer implements IterableIterator<Token> {
             return;
         } else {
             for (const rule of this.rules) {
+                const start = this.index;
                 const match = this.match(
                     this.source.substring(this.index),
                     rule.pattern
                 );
+                const end = this.index;
 
                 if (match) {
                     if (rule.ignore || rule.name === "") {
@@ -63,7 +65,11 @@ export class Tokenizer implements IterableIterator<Token> {
                     } else {
                         return {
                             name: rule.name,
-                            value: match
+                            value: match,
+                            position: {
+                                start: start,
+                                end: end
+                            }
                         };
                     }
                 }
