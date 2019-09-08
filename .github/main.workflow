@@ -1,9 +1,9 @@
-workflow "Tests" {
-  on = "push"
+workflow "Main" {
   resolves = ["test all"]
+  on = "push"
 }
 
 action "test all" {
   uses = "denolib/deno-action@0.17.0"
-  args = "test *_test.ts --allow-all"
+  args = "-A test *_test.ts"
 }
