@@ -1,7 +1,7 @@
 import { Pattern } from "./pattern.ts";
 
 export interface Rule {
-    name: string;
+    type: string;
     pattern: Pattern;
     ignore?: boolean;
 }

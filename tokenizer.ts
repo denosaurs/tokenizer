@@ -56,11 +56,11 @@ export class Tokenizer implements IterableIterator<Token> {
                 const end = this.index;
 
                 if (match) {
-                    if (rule.ignore || rule.name === "") {
+                    if (rule.ignore || rule.type === "") {
                         return this.scan();
                     } else {
                         return {
-                            name: rule.name,
+                            type: rule.type,
                             value: match,
                             position: {
                                 start: start,

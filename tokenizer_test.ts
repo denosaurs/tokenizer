@@ -5,12 +5,12 @@ import { Tokenizer } from "./mod.ts";
 
 test(function matchesSingleRegex() {
     const tokenizer = new Tokenizer("0123456789", [
-        { name: "DIGITS", pattern: /\d+/ }
+        { type: "DIGITS", pattern: /\d+/ }
     ]);
 
     assertEquals(tokenizer.next(), {
         done: false,
-        value: { name: "DIGITS", value: "0123456789", position: { start: 0, end: 10 } }
+        value: { type: "DIGITS", value: "0123456789", position: { start: 0, end: 10 } }
     });
     assertEquals(tokenizer.next(), {
         done: true,
@@ -20,33 +20,33 @@ test(function matchesSingleRegex() {
 
 test(function matchesMultipleRegex() {
     const tokenizer = new Tokenizer("0123456789 0123456789", [
-        { name: "DIGITS", pattern: /\d+/ },
-        { name: "SPACE", pattern: / / }
+        { type: "DIGITS", pattern: /\d+/ },
+        { type: "SPACE", pattern: / / }
     ]);
 
     assertEquals(tokenizer.next(), {
         done: false,
-        value: { name: "DIGITS", value: "0123456789", position: { start: 0, end: 10 } }
+        value: { type: "DIGITS", value: "0123456789", position: { start: 0, end: 10 } }
     });
     assertEquals(tokenizer.next(), {
         done: false,
-        value: { name: "SPACE", value: " ", position: { start: 10, end: 11 } }
+        value: { type: "SPACE", value: " ", position: { start: 10, end: 11 } }
     });
     assertEquals(tokenizer.next(), {
         done: false,
-        value: { name: "DIGITS", value: "0123456789", position: { start: 11, end: 21 } }
+        value: { type: "DIGITS", value: "0123456789", position: { start: 11, end: 21 } }
     });
     assertEquals(tokenizer.next(), { done: true, value: undefined });
 });
 
 test(function matchesSingleString() {
     const tokenizer = new Tokenizer("0123456789", [
-        { name: "DIGITS", pattern: "0123456789" }
+        { type: "DIGITS", pattern: "0123456789" }
     ]);
 
     assertEquals(tokenizer.next(), {
         done: false,
-        value: { name: "DIGITS", value: "0123456789", position: { start: 0, end: 10 } }
+        value: { type: "DIGITS", value: "0123456789", position: { start: 0, end: 10 } }
     });
     assertEquals(tokenizer.next(), {
         done: true,
@@ -56,21 +56,21 @@ test(function matchesSingleString() {
 
 test(function matchesMultipleString() {
     const tokenizer = new Tokenizer("0123456789 0123456789", [
-        { name: "DIGITS", pattern: "0123456789" },
-        { name: "SPACE", pattern: " " }
+        { type: "DIGITS", pattern: "0123456789" },
+        { type: "SPACE", pattern: " " }
     ]);
 
     assertEquals(tokenizer.next(), {
         done: false,
-        value: { name: "DIGITS", value: "0123456789", position: { start: 0, end: 10 } }
+        value: { type: "DIGITS", value: "0123456789", position: { start: 0, end: 10 } }
     });
     assertEquals(tokenizer.next(), {
         done: false,
-        value: { name: "SPACE", value: " ", position: { start: 10, end: 11 } }
+        value: { type: "SPACE", value: " ", position: { start: 10, end: 11 } }
     });
     assertEquals(tokenizer.next(), {
         done: false,
-        value: { name: "DIGITS", value: "0123456789", position: { start: 11, end: 21 } }
+        value: { type: "DIGITS", value: "0123456789", position: { start: 11, end: 21 } }
     });
     assertEquals(tokenizer.next(), {
         done: true,
@@ -81,7 +81,7 @@ test(function matchesMultipleString() {
 test(function matchesSingleFunctionPattern() {
     const tokenizer = new Tokenizer('"0123456789 abcdef"', [
         {
-            name: "STRING",
+            type: "STRING",
             pattern: (text: string) => {
                 if (text.startsWith('"')) {
                     let i = 1;
@@ -104,7 +104,7 @@ test(function matchesSingleFunctionPattern() {
     assertEquals(tokenizer.next(), {
         done: false,
         value: {
-            name: "STRING",
+            type: "STRING",
             value: "\"0123456789 abcdef\"",
             position: { start: 0, end: 19 }
         }
@@ -118,7 +118,7 @@ test(function matchesSingleFunctionPattern() {
 test(function matchesMultipleFunctionPattern() {
     const tokenizer = new Tokenizer('"0123456789 abcdef" "0123456789 abcdef"', [
         {
-            name: "STRING",
+            type: "STRING",
             pattern: (text: string) => {
                 if (text.startsWith('"')) {
                     let i = 1;
@@ -137,7 +137,7 @@ test(function matchesMultipleFunctionPattern() {
             }
         },
         {
-            name: "SPACE",
+            type: "SPACE",
             pattern: (text: string) => {
                 let i = 0;
                 let out = '';
@@ -155,7 +155,7 @@ test(function matchesMultipleFunctionPattern() {
     assertEquals(tokenizer.next(), {
         done: false,
         value: {
-            name: "STRING",
+            type: "STRING",
             value: "\"0123456789 abcdef\"",
             position: { start: 0, end: 19 }
         }
@@ -163,7 +163,7 @@ test(function matchesMultipleFunctionPattern() {
     assertEquals(tokenizer.next(), {
         done: false,
         value: {
-            name: "SPACE",
+            type: "SPACE",
             value: " ",
             position: { start: 19, end: 20 }
         }
@@ -171,7 +171,7 @@ test(function matchesMultipleFunctionPattern() {
     assertEquals(tokenizer.next(), {
         done: false,
         value: {
-            name: "STRING",
+            type: "STRING",
             value: "\"0123456789 abcdef\"",
             position: { start: 20, end: 39 }
         }
@@ -184,7 +184,7 @@ test(function matchesMultipleFunctionPattern() {
 
 test(function ignoresSingleRegex() {
     const tokenizer = new Tokenizer("0123456789", [
-        { name: "", pattern: /\d+/ }
+        { type: "", pattern: /\d+/ }
     ]);
 
     assertEquals(tokenizer.next(), {
@@ -199,8 +199,8 @@ test(function ignoresSingleRegex() {
 
 test(function ignoresMultipleRegex() {
     const tokenizer = new Tokenizer("0123456789 0123456789", [
-        { name: "", pattern: /\d+/ },
-        { name: "", pattern: / / }
+        { type: "", pattern: /\d+/ },
+        { type: "", pattern: / / }
     ]);
 
     assertEquals(tokenizer.next(), {
@@ -223,7 +223,7 @@ test(function ignoresMultipleRegex() {
 
 test(function ignoresSingleString() {
     const tokenizer = new Tokenizer("0123456789", [
-        { name: "", pattern: "0123456789" }
+        { type: "", pattern: "0123456789" }
     ]);
 
     assertEquals(tokenizer.next(), {
@@ -238,8 +238,8 @@ test(function ignoresSingleString() {
 
 test(function ignoresMultipleString() {
     const tokenizer = new Tokenizer("0123456789 0123456789", [
-        { name: "", pattern: "0123456789" },
-        { name: "", pattern: " " }
+        { type: "", pattern: "0123456789" },
+        { type: "", pattern: " " }
     ]);
 
     assertEquals(tokenizer.next(), {
@@ -263,7 +263,7 @@ test(function ignoresMultipleString() {
 test(function ignoresSingleFunctionPattern() {
     const tokenizer = new Tokenizer('"0123456789 abcdef"', [
         {
-            name: "",
+            type: "",
             pattern: (text: string) => {
                 if (text.startsWith('"')) {
                     let i = 1;
@@ -296,7 +296,7 @@ test(function ignoresSingleFunctionPattern() {
 test(function ignoresMultipleFunctionPattern() {
     const tokenizer = new Tokenizer('"0123456789 abcdef" "0123456789 abcdef"', [
         {
-            name: "",
+            type: "",
             pattern: (text: string) => {
                 if (text.startsWith('"')) {
                     let i = 1;
@@ -315,7 +315,7 @@ test(function ignoresMultipleFunctionPattern() {
             }
         },
         {
-            name: "",
+            type: "",
             pattern: (text: string) => {
                 let i = 0;
                 let out = '';
@@ -350,16 +350,16 @@ test(function ignoresMultipleFunctionPattern() {
 
 test(function testIterable() {
     const tokenizer = new Tokenizer("0123456789 0123456789", [
-        { name: "DIGITS", pattern: /\d+/ },
-        { name: "SPACE", pattern: / / }
+        { type: "DIGITS", pattern: /\d+/ },
+        { type: "SPACE", pattern: / / }
     ]);
 
     assertEquals(
         [...tokenizer],
         [
-            { name: "DIGITS", value: "0123456789", position: { start: 0, end: 10 } },
-            { name: "SPACE", value: " ", position: { start: 10, end: 11 } },
-            { name: "DIGITS", value: "0123456789", position: { start: 11, end: 21 } }
+            { type: "DIGITS", value: "0123456789", position: { start: 0, end: 10 } },
+            { type: "SPACE", value: " ", position: { start: 10, end: 11 } },
+            { type: "DIGITS", value: "0123456789", position: { start: 11, end: 21 } }
         ]
     );
 });

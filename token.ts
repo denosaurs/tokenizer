@@ -1,5 +1,5 @@
 export interface Token {
-    name: string;
+    type: string;
     value: string;
     position: { start: number, end: number }
 }

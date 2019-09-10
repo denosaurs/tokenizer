@@ -9,10 +9,10 @@ A simple tokenizer for deno.
 import { Tokenizer } from "https://deno.land/x/tokenizer/mod.ts";
 
 const tokenizer = new Tokenizer("abc 123 HELLO", [
-    { name: "HELLO",  pattern: "HELLO" },
-    { name: "WORD",   pattern: /[a-zA-Z]+/ },
-    { name: "DIGITS", pattern: /\d+/ },
-    { name: "SPACE",  pattern: / /, ignore: true } // Or leave name blank and remove "ignore: true"
+    { type: "HELLO",  pattern: "HELLO" },
+    { type: "WORD",   pattern: /[a-zA-Z]+/ },
+    { type: "DIGITS", pattern: /\d+/ },
+    { type: "SPACE",  pattern: / /, ignore: true } // Or leave type blank and remove "ignore: true"
 ]);
 
 // The first option:
@@ -24,14 +24,14 @@ console.log(...tokenizer);
 // }
 
 // If you used the first option:
-// => [ { name: "WORD", value: "abc", position: { start: 0, end: 3 } },
-//      { name: "DIGITS", value: "123", position: { start: 4, end: 7 } },
-//      { name: "HELLO", value: "HELLO", position: { start: 8, end: 13 } } ]
+// => [ { type: "WORD", value: "abc", position: { start: 0, end: 3 } },
+//      { type: "DIGITS", value: "123", position: { start: 4, end: 7 } },
+//      { type: "HELLO", value: "HELLO", position: { start: 8, end: 13 } } ]
 
 // If you use the second option:
-// => { name: "WORD", value: "abc", position: { start: 0, end: 3 } }
-// => { name: "DIGITS", value: "123", position: { start: 4, end: 7 } }
-// => { name: "HELLO", value: "HELLO", position: { start: 8, end: 13 } }
+// => { type: "WORD", value: "abc", position: { start: 0, end: 3 } }
+// => { type: "DIGITS", value: "123", position: { start: 4, end: 7 } }
+// => { type: "HELLO", value: "HELLO", position: { start: 8, end: 13 } }
 ```
 
 ## TODO
