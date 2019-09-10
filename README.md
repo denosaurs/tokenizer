@@ -6,7 +6,7 @@ A simple tokenizer for deno.
 
 ## Example
 ```TypeScript
-import { Tokenizer } from "https://denopkg.com/eliassjogreen/deno_tokenizer/mod.ts";
+import { Tokenizer } from "https://deno.land/x/tokenizer/mod.ts";
 
 const tokenizer = new Tokenizer("abc 123 HELLO", [
     { name: "HELLO",  pattern: "HELLO" },
@@ -37,5 +37,8 @@ console.log(...tokenizer);
 ## TODO
 - [x] Custom patterns using functions
 - [x] Add position information to Token
+- [x] Array patterns (Multiple patterns for the same rule)
 - [ ] Better error handling
 - [ ] Documentation
+- [ ] Examples
+- [ ] More and better tests

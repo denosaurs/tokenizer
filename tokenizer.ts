@@ -43,9 +43,7 @@ export class Tokenizer implements IterableIterator<Token> {
             };
         }
 
-        throw `Unexpected character: "${this.source[this.index]}" at index ${
-            this.index
-        }`;
+        throw `Unexpected character: "${this.source[this.index]}" at index ${this.index}`;
     }
 
     private scan(): Token {
@@ -54,10 +52,7 @@ export class Tokenizer implements IterableIterator<Token> {
         } else {
             for (const rule of this.rules) {
                 const start = this.index;
-                const match = this.match(
-                    this.source.substring(this.index),
-                    rule.pattern
-                );
+                const match = this.match(this.source.substring(this.index), rule.pattern);
                 const end = this.index;
 
                 if (match) {
@@ -78,24 +73,22 @@ export class Tokenizer implements IterableIterator<Token> {
         }
     }
 
-    private match(text: string, pattern: Pattern): string {
-        let match: string;
+    private match(text: string, pattern: Pattern): string | undefined {
+        let match: string | undefined = undefined;
 
-        if (typeof pattern === "string") {
-            match = text.startsWith(pattern) ? pattern : undefined;
-            if (!match) return;
-        } else if (typeof pattern === "function") {
+        if (typeof pattern === "function") {
             match = pattern(text);
-            if (!match) return;
-        } else {
-            const matchArray = text.match(pattern);
-            if (!matchArray) return;
-            if (matchArray.index !== 0) return;
-
-            match = matchArray[0];
+        } else if (typeof pattern === "string") {
+            match = text.startsWith(pattern) ? pattern : undefined;
+        } else if (pattern instanceof RegExp) {
+            match = text.search(pattern) === 0 ? text.match(pattern)[0] : undefined;
+        } else if (pattern instanceof Array) {
+            for (const p of pattern) {
+                if ((match = this.match(text, p))) break;
+            }
         }
 
-        this._index += match.length;
+        if (match) this._index += match.length;
         return match;
     }
 
