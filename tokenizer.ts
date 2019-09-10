@@ -2,25 +2,37 @@ import { Rule } from "./rule.ts";
 import { Token } from "./token.ts";
 import { Pattern } from "./pattern.ts";
 
+/** Tokenizes given source string into tokens */
 export class Tokenizer implements IterableIterator<Token> {
     private _index: number = 0;
 
+    /** The string that will be scanned */
     public readonly source: string;
+    /** The rules that tells the Tokenizer what patterns to look for */
     public readonly rules: Rule[];
 
+    /** The current index of the Tokenizer in the source string */
     public get index(): number {
         return this._index;
     }
 
+    /** Checks if the Tokenizer is done scanning the source string */
     public get done(): boolean {
         return !(this.index < this.source.length);
     }
 
+    /** Constructs a new Tokenizer */
     constructor(source: string, rules: Rule[]) {
         this.source = source;
         this.rules = rules;
     }
 
+    /** Resets the index of the Tokenizer */
+    public reset(): void {
+        this._index = 0;
+    }
+
+    /** Returns the next scanned Token */
     public next(): IteratorResult<Token> {
         if (this.done) {
             return {
