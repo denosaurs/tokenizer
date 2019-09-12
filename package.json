@@ -1,9 +1,4 @@
 {
-  "name": "deno_tokenizer",
-  "version": "0.1.0",
-  "repository": "https://github.com/eliassjogreen/deno_tokenizer.git",
-  "author": "Elias Sjögreen <eliassjogreen1@gmail.com>",
-  "license": "MIT",
   "scripts": {
     "lint": "eslint *.ts",
     "lint:fix": "eslint *.ts --fix",
