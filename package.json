@@ -1,0 +1,21 @@
+{
+  "name": "deno_tokenizer",
+  "version": "0.1.0",
+  "repository": "https://github.com/eliassjogreen/deno_tokenizer.git",
+  "author": "Elias Sjögreen <eliassjogreen1@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "lint": "eslint *.ts",
+    "lint:fix": "eslint *.ts --fix",
+    "format": "prettier --write *.ts",
+    "format:check": "prettier --check *.ts"
+  },
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^2.2.0",
+    "@typescript-eslint/parser": "^2.2.0",
+    "eslint": "^6.3.0",
+    "eslint-config-prettier": "^6.3.0",
+    "eslint-plugin-prettier": "^3.1.0",
+    "prettier": "^1.18.2"
+  }
+}

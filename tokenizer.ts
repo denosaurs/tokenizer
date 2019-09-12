@@ -4,7 +4,7 @@ import { Pattern } from "./pattern.ts";
 
 /** Tokenizes given source string into tokens */
 export class Tokenizer implements IterableIterator<Token> {
-    private _index: number = 0;
+    private _index = 0;
 
     /** The string that will be scanned */
     public readonly source: string;
@@ -55,16 +55,21 @@ export class Tokenizer implements IterableIterator<Token> {
             };
         }
 
-        throw `Unexpected character: "${this.source[this.index]}" at index ${this.index}`;
+        throw `Unexpected character: "${this.source[this.index]}" at index ${
+            this.index
+        }`;
     }
 
-    private scan(): Token {
+    private scan(): Token | undefined {
         if (this.done) {
             return;
         } else {
             for (const rule of this.rules) {
                 const start = this.index;
-                const match = this.match(this.source.substring(this.index), rule.pattern);
+                const match = this.match(
+                    this.source.substring(this.index),
+                    rule.pattern
+                );
                 const end = this.index;
 
                 if (match) {
@@ -93,7 +98,8 @@ export class Tokenizer implements IterableIterator<Token> {
         } else if (typeof pattern === "string") {
             match = text.startsWith(pattern) ? pattern : undefined;
         } else if (pattern instanceof RegExp) {
-            match = text.search(pattern) === 0 ? text.match(pattern)[0] : undefined;
+            const result = text.match(pattern);
+            match = result && result.index === 0 ? result[0] : undefined;
         } else if (pattern instanceof Array) {
             for (const p of pattern) {
                 if ((match = this.match(text, p))) break;
