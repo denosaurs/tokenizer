@@ -28,15 +28,54 @@ export class Tokenizer implements IterableIterator<Token> {
     }
 
     /** Constructs a new Tokenizer */
-    constructor(source: string = "", rules: Rule[]) {
-        this.source = source;
-        this.rules = rules;
+    constructor(rules: Rule[]);
+    constructor(source: string, rules: Rule[]);
+    constructor(sourceOrRules: string | Rule[], rulesOrNothing?: Rule[]) {
+        if (typeof sourceOrRules === "string") {
+            this.source = sourceOrRules;
+        } else {
+            this.source = "";
+            this.rules = sourceOrRules;
+        }
+
+        if (rulesOrNothing) {
+            this.rules = rulesOrNothing;
+        }
     }
 
-    /** Tokenizes given input (default is the lexer input) to a Token array */
-    public tokenize(source: string = this.source): Token[] {
+    /** Tokenizes given string (default is the lexer input) to a Token array */
+    public tokenize();
+    public tokenize(source: string);
+    public tokenize(source: string, callback: (token: Token) => void);
+    public tokenize(callback: (token: Token) => void);
+    public tokenize(sourceOrCallback?: ((token: Token) => void) | string, callbackOrNothing?: (token: Token) => void): Token[] {
+        let source = this.source;
+        let callback = undefined;
+
+        if (typeof sourceOrCallback === "string") {
+            source = sourceOrCallback;
+        } else if (typeof sourceOrCallback === "function") {
+            callback = sourceOrCallback;
+        }
+
+        if (callbackOrNothing) {
+            callback = callbackOrNothing;
+        }
+
         const tokenizer = new Tokenizer(source, this.rules);
-        return [...tokenizer];
+        const tokens: Token[] = [];
+
+        while (!tokenizer.done) {
+            const token = tokenizer.next();
+
+            if (callback) {
+                callback(token.value);
+            }
+
+            tokens.push(token.value);
+        }
+
+        return tokens;
     }
 
     /** Resets the index of the Tokenizer */
