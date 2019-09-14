@@ -1,0 +1,12 @@
+on: push
+name: Tests
+jobs:
+  testAll:
+    name: test all
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@master
+    - name: test all
+      uses: denolib/deno-action@0.18.0
+      with:
+        args: -A test *_test.ts
