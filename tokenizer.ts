@@ -115,19 +115,20 @@ export class Tokenizer implements IterableIterator<Token> {
         } else {
             for (const rule of this.rules) {
                 const start = this.index;
-                const match = this.match(
+                const result = this.match(
                     this.source.substring(this.index),
                     rule.pattern
                 );
                 const end = this.index;
 
-                if (match) {
+                if (result) {
                     if (rule.ignore || rule.type === "") {
                         return this.scan();
                     } else {
                         return {
                             type: rule.type,
-                            value: match,
+                            match: result.match,
+                            groups: result.groups,
                             position: {
                                 start: start,
                                 end: end
@@ -139,24 +140,31 @@ export class Tokenizer implements IterableIterator<Token> {
         }
     }
 
-    private match(text: string, pattern: Pattern): string | undefined {
-        let match: string | undefined = undefined;
+    private match(text: string, pattern: Pattern): { match: string; groups: string[] } {
+        let result: { match: string; groups: string[] } | undefined;
 
         if (typeof pattern === "function") {
-            match = pattern(text);
+            const matched = pattern(text)
+        
+            result = matched ? { match: matched, groups: [] } : undefined;
         } else if (typeof pattern === "string") {
-            match = text.startsWith(pattern) ? pattern : undefined;
+            result = text.startsWith(pattern) ? { match: pattern, groups: [] } : undefined;
         } else if (pattern instanceof RegExp) {
-            const result = text.match(pattern);
-            match = result && result.index === 0 ? result[0] : undefined;
+            const matched = text.match(pattern);
+            
+            if (matched && matched.index === 0)
+                result = {
+                    match: matched[0],
+                    groups: matched.length > 1 ? matched.slice(1) : []
+                };
         } else if (pattern instanceof Array) {
             for (const p of pattern) {
-                if ((match = this.match(text, p))) break;
+                if ((result = this.match(text, p))) break;
             }
         }
 
-        if (match) this._index += match.length;
-        return match;
+        if (result) this._index += result.match.length;
+        return result;
     }
 
     [Symbol.iterator](): IterableIterator<Token> {

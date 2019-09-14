@@ -12,7 +12,8 @@ test(function matchesSingleRegex() {
         done: false,
         value: {
             type: "DIGITS",
-            value: "0123456789",
+            match: "0123456789",
+            groups: [],
             position: { start: 0, end: 10 }
         }
     });
@@ -32,19 +33,26 @@ test(function matchesMultipleRegex() {
         done: false,
         value: {
             type: "DIGITS",
-            value: "0123456789",
+            match: "0123456789",
+            groups: [],
             position: { start: 0, end: 10 }
         }
     });
     assertEquals(tokenizer.next(), {
         done: false,
-        value: { type: "SPACE", value: " ", position: { start: 10, end: 11 } }
+        value: {
+            type: "SPACE",
+            match: " ",
+            groups: [],
+            position: { start: 10, end: 11 }
+        }
     });
     assertEquals(tokenizer.next(), {
         done: false,
         value: {
             type: "DIGITS",
-            value: "0123456789",
+            match: "0123456789",
+            groups: [],
             position: { start: 11, end: 21 }
         }
     });
@@ -60,7 +68,8 @@ test(function matchesSingleString() {
         done: false,
         value: {
             type: "DIGITS",
-            value: "0123456789",
+            match: "0123456789",
+            groups: [],
             position: { start: 0, end: 10 }
         }
     });
@@ -80,19 +89,22 @@ test(function matchesMultipleString() {
         done: false,
         value: {
             type: "DIGITS",
-            value: "0123456789",
+            match: "0123456789",
+            groups: [],
             position: { start: 0, end: 10 }
         }
     });
     assertEquals(tokenizer.next(), {
         done: false,
-        value: { type: "SPACE", value: " ", position: { start: 10, end: 11 } }
+        value: { type: "SPACE", match: " ",
+        groups: [ ], position: { start: 10, end: 11 } }
     });
     assertEquals(tokenizer.next(), {
         done: false,
         value: {
             type: "DIGITS",
-            value: "0123456789",
+            match: "0123456789",
+            groups: [],
             position: { start: 11, end: 21 }
         }
     });
@@ -129,7 +141,8 @@ test(function matchesSingleFunctionPattern() {
         done: false,
         value: {
             type: "STRING",
-            value: '"0123456789 abcdef"',
+            match: '"0123456789 abcdef"',
+            groups: [],
             position: { start: 0, end: 19 }
         }
     });
@@ -180,7 +193,8 @@ test(function matchesMultipleFunctionPattern() {
         done: false,
         value: {
             type: "STRING",
-            value: '"0123456789 abcdef"',
+            match: '"0123456789 abcdef"',
+            groups: [],
             position: { start: 0, end: 19 }
         }
     });
@@ -188,7 +202,8 @@ test(function matchesMultipleFunctionPattern() {
         done: false,
         value: {
             type: "SPACE",
-            value: " ",
+            match: " ",
+            groups: [],
             position: { start: 19, end: 20 }
         }
     });
@@ -196,7 +211,8 @@ test(function matchesMultipleFunctionPattern() {
         done: false,
         value: {
             type: "STRING",
-            value: '"0123456789 abcdef"',
+            match: '"0123456789 abcdef"',
+            groups: [],
             position: { start: 20, end: 39 }
         }
     });
@@ -383,13 +399,20 @@ test(function testIterable() {
         [
             {
                 type: "DIGITS",
-                value: "0123456789",
+                match: "0123456789",
+                groups: [],
                 position: { start: 0, end: 10 }
             },
-            { type: "SPACE", value: " ", position: { start: 10, end: 11 } },
+            {
+                type: "SPACE",
+                match: " ",
+                groups: [],
+                position: { start: 10, end: 11 }
+            },
             {
                 type: "DIGITS",
-                value: "0123456789",
+                match: "0123456789",
+                groups: [],
                 position: { start: 11, end: 21 }
             }
         ]
