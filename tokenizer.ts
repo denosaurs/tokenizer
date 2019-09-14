@@ -11,6 +11,12 @@ export class Tokenizer implements IterableIterator<Token> {
     /** The rules that tells the Tokenizer what patterns to look for */
     public readonly rules: Rule[];
 
+    public unexpectedCharacterError: () => void = () => {
+        throw `Unexpected character: "${this.source[this.index]}" at index ${
+            this.index
+        }`;
+    };
+
     /** The current index of the Tokenizer in the source string */
     public get index(): number {
         return this._index;
@@ -22,9 +28,15 @@ export class Tokenizer implements IterableIterator<Token> {
     }
 
     /** Constructs a new Tokenizer */
-    constructor(source: string, rules: Rule[]) {
+    constructor(source: string = "", rules: Rule[]) {
         this.source = source;
         this.rules = rules;
+    }
+
+    /** Tokenizes given input (default is the lexer input) to a Token array */
+    public tokenize(source: string = this.source): Token[] {
+        const tokenizer = new Tokenizer(source, this.rules);
+        return [...tokenizer];
     }
 
     /** Resets the index of the Tokenizer */
@@ -55,9 +67,7 @@ export class Tokenizer implements IterableIterator<Token> {
             };
         }
 
-        throw `Unexpected character: "${this.source[this.index]}" at index ${
-            this.index
-        }`;
+        this.unexpectedCharacterError();
     }
 
     private scan(): Token | undefined {
