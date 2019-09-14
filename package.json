@@ -1,5 +1,6 @@
 {
   "scripts": {
+    "test": "deno test *_test.ts -A",
     "lint": "eslint *.ts",
     "lint:fix": "eslint *.ts --fix",
     "format": "prettier --write *.ts",

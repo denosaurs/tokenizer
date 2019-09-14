@@ -4,6 +4,6 @@ workflow "Tests" {
 }
 
 action "test all" {
-  uses = "denolib/deno-action@0.17.0"
+  uses = "denolib/deno-action@0.18.0"
   args = "-A test *_test.ts"
 }
