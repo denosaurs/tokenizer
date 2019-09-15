@@ -6,7 +6,7 @@ import { Tokenizer } from "../../mod.ts";
 const source = readFileStrSync("./sample.json");
 
 const tokenizer = new Tokenizer(source, [
-    { type: "SPACE", pattern: /\s+/, ignore: true },
+    { type: "WHITESPACE", pattern: /[ \n\r\t]+/ },
     { type: "LBRACE", pattern: "{"},
     { type: "RBRACE", pattern: "}"},
     { type: "LBRACK", pattern: "["},

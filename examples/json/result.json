@@ -9,12 +9,30 @@
         }
     },
     {
+        "type": "WHITESPACE",
+        "match": "\n    ",
+        "groups": [],
+        "position": {
+            "start": 1,
+            "end": 6
+        }
+    },
+    {
         "type": "LBRACE",
         "match": "{",
         "groups": [],
         "position": {
+            "start": 6,
+            "end": 7
+        }
+    },
+    {
+        "type": "WHITESPACE",
+        "match": "\n        ",
+        "groups": [],
+        "position": {
             "start": 7,
-            "end": 8
+            "end": 16
         }
     },
     {
@@ -22,8 +40,8 @@
         "match": "\"number\"",
         "groups": [],
         "position": {
-            "start": 18,
-            "end": 26
+            "start": 16,
+            "end": 24
         }
     },
     {
@@ -31,8 +49,17 @@
         "match": ":",
         "groups": [],
         "position": {
-            "start": 26,
-            "end": 27
+            "start": 24,
+            "end": 25
+        }
+    },
+    {
+        "type": "WHITESPACE",
+        "match": " ",
+        "groups": [],
+        "position": {
+            "start": 25,
+            "end": 26
         }
     },
     {
@@ -40,8 +67,8 @@
         "match": "-13.37e2",
         "groups": [],
         "position": {
-            "start": 28,
-            "end": 36
+            "start": 26,
+            "end": 34
         }
     },
     {
@@ -49,8 +76,17 @@
         "match": ",",
         "groups": [],
         "position": {
-            "start": 36,
-            "end": 37
+            "start": 34,
+            "end": 35
+        }
+    },
+    {
+        "type": "WHITESPACE",
+        "match": "\n        ",
+        "groups": [],
+        "position": {
+            "start": 35,
+            "end": 44
         }
     },
     {
@@ -58,8 +94,8 @@
         "match": "\"string\"",
         "groups": [],
         "position": {
-            "start": 47,
-            "end": 55
+            "start": 44,
+            "end": 52
         }
     },
     {
@@ -67,8 +103,17 @@
         "match": ":",
         "groups": [],
         "position": {
-            "start": 55,
-            "end": 56
+            "start": 52,
+            "end": 53
+        }
+    },
+    {
+        "type": "WHITESPACE",
+        "match": " ",
+        "groups": [],
+        "position": {
+            "start": 53,
+            "end": 54
         }
     },
     {
@@ -76,8 +121,8 @@
         "match": "\"Hello World!\"",
         "groups": [],
         "position": {
-            "start": 57,
-            "end": 71
+            "start": 54,
+            "end": 68
         }
     },
     {
@@ -85,8 +130,17 @@
         "match": ",",
         "groups": [],
         "position": {
-            "start": 71,
-            "end": 72
+            "start": 68,
+            "end": 69
+        }
+    },
+    {
+        "type": "WHITESPACE",
+        "match": "\n        ",
+        "groups": [],
+        "position": {
+            "start": 69,
+            "end": 78
         }
     },
     {
@@ -94,8 +148,8 @@
         "match": "\"true\"",
         "groups": [],
         "position": {
-            "start": 82,
-            "end": 88
+            "start": 78,
+            "end": 84
         }
     },
     {
@@ -103,8 +157,17 @@
         "match": ":",
         "groups": [],
         "position": {
-            "start": 88,
-            "end": 89
+            "start": 84,
+            "end": 85
+        }
+    },
+    {
+        "type": "WHITESPACE",
+        "match": " ",
+        "groups": [],
+        "position": {
+            "start": 85,
+            "end": 86
         }
     },
     {
@@ -112,8 +175,8 @@
         "match": "true",
         "groups": [],
         "position": {
-            "start": 90,
-            "end": 94
+            "start": 86,
+            "end": 90
         }
     },
     {
@@ -121,8 +184,17 @@
         "match": ",",
         "groups": [],
         "position": {
-            "start": 94,
-            "end": 95
+            "start": 90,
+            "end": 91
+        }
+    },
+    {
+        "type": "WHITESPACE",
+        "match": "\n        ",
+        "groups": [],
+        "position": {
+            "start": 91,
+            "end": 100
         }
     },
     {
@@ -130,8 +202,8 @@
         "match": "\"false\"",
         "groups": [],
         "position": {
-            "start": 105,
-            "end": 112
+            "start": 100,
+            "end": 107
         }
     },
     {
@@ -139,8 +211,17 @@
         "match": ":",
         "groups": [],
         "position": {
-            "start": 112,
-            "end": 113
+            "start": 107,
+            "end": 108
+        }
+    },
+    {
+        "type": "WHITESPACE",
+        "match": " ",
+        "groups": [],
+        "position": {
+            "start": 108,
+            "end": 109
         }
     },
     {
@@ -148,8 +229,8 @@
         "match": "false",
         "groups": [],
         "position": {
-            "start": 114,
-            "end": 119
+            "start": 109,
+            "end": 114
         }
     },
     {
@@ -157,8 +238,17 @@
         "match": ",",
         "groups": [],
         "position": {
-            "start": 119,
-            "end": 120
+            "start": 114,
+            "end": 115
+        }
+    },
+    {
+        "type": "WHITESPACE",
+        "match": "\n        ",
+        "groups": [],
+        "position": {
+            "start": 115,
+            "end": 124
         }
     },
     {
@@ -166,8 +256,8 @@
         "match": "\"null\"",
         "groups": [],
         "position": {
-            "start": 130,
-            "end": 136
+            "start": 124,
+            "end": 130
         }
     },
     {
@@ -175,8 +265,17 @@
         "match": ":",
         "groups": [],
         "position": {
-            "start": 136,
-            "end": 137
+            "start": 130,
+            "end": 131
+        }
+    },
+    {
+        "type": "WHITESPACE",
+        "match": " ",
+        "groups": [],
+        "position": {
+            "start": 131,
+            "end": 132
         }
     },
     {
@@ -184,8 +283,17 @@
         "match": "null",
         "groups": [],
         "position": {
-            "start": 138,
-            "end": 142
+            "start": 132,
+            "end": 136
+        }
+    },
+    {
+        "type": "WHITESPACE",
+        "match": "\n    ",
+        "groups": [],
+        "position": {
+            "start": 136,
+            "end": 141
         }
     },
     {
@@ -193,8 +301,17 @@
         "match": "}",
         "groups": [],
         "position": {
-            "start": 148,
-            "end": 149
+            "start": 141,
+            "end": 142
+        }
+    },
+    {
+        "type": "WHITESPACE",
+        "match": "\n",
+        "groups": [],
+        "position": {
+            "start": 142,
+            "end": 143
         }
     },
     {
@@ -202,8 +319,8 @@
         "match": "]",
         "groups": [],
         "position": {
-            "start": 151,
-            "end": 152
+            "start": 143,
+            "end": 144
         }
     }
 ]
