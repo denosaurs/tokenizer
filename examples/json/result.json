@@ -9,30 +9,12 @@
         }
     },
     {
-        "type": "WHITESPACE",
-        "match": "\n    ",
-        "groups": [],
-        "position": {
-            "start": 1,
-            "end": 6
-        }
-    },
-    {
         "type": "LBRACE",
         "match": "{",
         "groups": [],
         "position": {
             "start": 6,
             "end": 7
-        }
-    },
-    {
-        "type": "WHITESPACE",
-        "match": "\n        ",
-        "groups": [],
-        "position": {
-            "start": 7,
-            "end": 16
         }
     },
     {
@@ -54,15 +36,6 @@
         }
     },
     {
-        "type": "WHITESPACE",
-        "match": " ",
-        "groups": [],
-        "position": {
-            "start": 25,
-            "end": 26
-        }
-    },
-    {
         "type": "NUMBER",
         "match": "-13.37e2",
         "groups": [],
@@ -78,15 +51,6 @@
         "position": {
             "start": 34,
             "end": 35
-        }
-    },
-    {
-        "type": "WHITESPACE",
-        "match": "\n        ",
-        "groups": [],
-        "position": {
-            "start": 35,
-            "end": 44
         }
     },
     {
@@ -108,15 +72,6 @@
         }
     },
     {
-        "type": "WHITESPACE",
-        "match": " ",
-        "groups": [],
-        "position": {
-            "start": 53,
-            "end": 54
-        }
-    },
-    {
         "type": "STRING",
         "match": "\"Hello World!\"",
         "groups": [],
@@ -132,15 +87,6 @@
         "position": {
             "start": 68,
             "end": 69
-        }
-    },
-    {
-        "type": "WHITESPACE",
-        "match": "\n        ",
-        "groups": [],
-        "position": {
-            "start": 69,
-            "end": 78
         }
     },
     {
@@ -162,15 +108,6 @@
         }
     },
     {
-        "type": "WHITESPACE",
-        "match": " ",
-        "groups": [],
-        "position": {
-            "start": 85,
-            "end": 86
-        }
-    },
-    {
         "type": "TRUE",
         "match": "true",
         "groups": [],
@@ -186,15 +123,6 @@
         "position": {
             "start": 90,
             "end": 91
-        }
-    },
-    {
-        "type": "WHITESPACE",
-        "match": "\n        ",
-        "groups": [],
-        "position": {
-            "start": 91,
-            "end": 100
         }
     },
     {
@@ -216,15 +144,6 @@
         }
     },
     {
-        "type": "WHITESPACE",
-        "match": " ",
-        "groups": [],
-        "position": {
-            "start": 108,
-            "end": 109
-        }
-    },
-    {
         "type": "FALSE",
         "match": "false",
         "groups": [],
@@ -240,15 +159,6 @@
         "position": {
             "start": 114,
             "end": 115
-        }
-    },
-    {
-        "type": "WHITESPACE",
-        "match": "\n        ",
-        "groups": [],
-        "position": {
-            "start": 115,
-            "end": 124
         }
     },
     {
@@ -270,15 +180,6 @@
         }
     },
     {
-        "type": "WHITESPACE",
-        "match": " ",
-        "groups": [],
-        "position": {
-            "start": 131,
-            "end": 132
-        }
-    },
-    {
         "type": "NULL",
         "match": "null",
         "groups": [],
@@ -288,30 +189,12 @@
         }
     },
     {
-        "type": "WHITESPACE",
-        "match": "\n    ",
-        "groups": [],
-        "position": {
-            "start": 136,
-            "end": 141
-        }
-    },
-    {
         "type": "RBRACE",
         "match": "}",
         "groups": [],
         "position": {
             "start": 141,
             "end": 142
-        }
-    },
-    {
-        "type": "WHITESPACE",
-        "match": "\n",
-        "groups": [],
-        "position": {
-            "start": 142,
-            "end": 143
         }
     },
     {
