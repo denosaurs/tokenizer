@@ -1,0 +1,209 @@
+[
+    {
+        "type": "LBRACK",
+        "match": "[",
+        "groups": [],
+        "position": {
+            "start": 0,
+            "end": 1
+        }
+    },
+    {
+        "type": "LBRACE",
+        "match": "{",
+        "groups": [],
+        "position": {
+            "start": 7,
+            "end": 8
+        }
+    },
+    {
+        "type": "STRING",
+        "match": "\"number\"",
+        "groups": [],
+        "position": {
+            "start": 18,
+            "end": 26
+        }
+    },
+    {
+        "type": "COLON",
+        "match": ":",
+        "groups": [],
+        "position": {
+            "start": 26,
+            "end": 27
+        }
+    },
+    {
+        "type": "NUMBER",
+        "match": "-13.37e2",
+        "groups": [],
+        "position": {
+            "start": 28,
+            "end": 36
+        }
+    },
+    {
+        "type": "COMMA",
+        "match": ",",
+        "groups": [],
+        "position": {
+            "start": 36,
+            "end": 37
+        }
+    },
+    {
+        "type": "STRING",
+        "match": "\"string\"",
+        "groups": [],
+        "position": {
+            "start": 47,
+            "end": 55
+        }
+    },
+    {
+        "type": "COLON",
+        "match": ":",
+        "groups": [],
+        "position": {
+            "start": 55,
+            "end": 56
+        }
+    },
+    {
+        "type": "STRING",
+        "match": "\"Hello World!\"",
+        "groups": [],
+        "position": {
+            "start": 57,
+            "end": 71
+        }
+    },
+    {
+        "type": "COMMA",
+        "match": ",",
+        "groups": [],
+        "position": {
+            "start": 71,
+            "end": 72
+        }
+    },
+    {
+        "type": "STRING",
+        "match": "\"true\"",
+        "groups": [],
+        "position": {
+            "start": 82,
+            "end": 88
+        }
+    },
+    {
+        "type": "COLON",
+        "match": ":",
+        "groups": [],
+        "position": {
+            "start": 88,
+            "end": 89
+        }
+    },
+    {
+        "type": "TRUE",
+        "match": "true",
+        "groups": [],
+        "position": {
+            "start": 90,
+            "end": 94
+        }
+    },
+    {
+        "type": "COMMA",
+        "match": ",",
+        "groups": [],
+        "position": {
+            "start": 94,
+            "end": 95
+        }
+    },
+    {
+        "type": "STRING",
+        "match": "\"false\"",
+        "groups": [],
+        "position": {
+            "start": 105,
+            "end": 112
+        }
+    },
+    {
+        "type": "COLON",
+        "match": ":",
+        "groups": [],
+        "position": {
+            "start": 112,
+            "end": 113
+        }
+    },
+    {
+        "type": "FALSE",
+        "match": "false",
+        "groups": [],
+        "position": {
+            "start": 114,
+            "end": 119
+        }
+    },
+    {
+        "type": "COMMA",
+        "match": ",",
+        "groups": [],
+        "position": {
+            "start": 119,
+            "end": 120
+        }
+    },
+    {
+        "type": "STRING",
+        "match": "\"null\"",
+        "groups": [],
+        "position": {
+            "start": 130,
+            "end": 136
+        }
+    },
+    {
+        "type": "COLON",
+        "match": ":",
+        "groups": [],
+        "position": {
+            "start": 136,
+            "end": 137
+        }
+    },
+    {
+        "type": "NULL",
+        "match": "null",
+        "groups": [],
+        "position": {
+            "start": 138,
+            "end": 142
+        }
+    },
+    {
+        "type": "RBRACE",
+        "match": "}",
+        "groups": [],
+        "position": {
+            "start": 148,
+            "end": 149
+        }
+    },
+    {
+        "type": "RBRACK",
+        "match": "]",
+        "groups": [],
+        "position": {
+            "start": 151,
+            "end": 152
+        }
+    }
+]

@@ -1,0 +1,9 @@
+[
+    {
+        "number": -13.37e2,
+        "string": "Hello World!",
+        "true": true,
+        "false": false,
+        "null": null
+    }
+]

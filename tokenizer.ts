@@ -72,7 +72,9 @@ export class Tokenizer implements IterableIterator<Token> {
                 callback(token.value);
             }
 
-            tokens.push(token.value);
+            if (!tokenizer.done) {
+                tokens.push(token.value);
+            }
         }
 
         return tokens;
