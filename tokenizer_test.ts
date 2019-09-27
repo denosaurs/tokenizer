@@ -96,8 +96,12 @@ test(function matchesMultipleString() {
     });
     assertEquals(tokenizer.next(), {
         done: false,
-        value: { type: "SPACE", match: " ",
-        groups: [ ], position: { start: 10, end: 11 } }
+        value: {
+            type: "SPACE",
+            match: " ",
+            groups: [],
+            position: { start: 10, end: 11 }
+        }
     });
     assertEquals(tokenizer.next(), {
         done: false,

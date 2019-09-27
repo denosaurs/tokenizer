@@ -50,3 +50,5 @@ console.log(...tokenizer);
 - [ ] Group matching tests
 - [ ] Examples
 - [ ] More and better tests
+- [ ] Line and column information? Or just a helper function to get line and column from index
+- [ ] BNF / EBNF ?

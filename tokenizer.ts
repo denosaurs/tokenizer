@@ -48,7 +48,10 @@ export class Tokenizer implements IterableIterator<Token> {
     public tokenize(source: string);
     public tokenize(source: string, callback: (token: Token) => void);
     public tokenize(callback: (token: Token) => void);
-    public tokenize(sourceOrCallback?: ((token: Token) => void) | string, callbackOrNothing?: (token: Token) => void): Token[] {
+    public tokenize(
+        sourceOrCallback?: ((token: Token) => void) | string,
+        callbackOrNothing?: (token: Token) => void
+    ): Token[] {
         let source = this.source;
         let callback = undefined;
 
@@ -142,18 +145,23 @@ export class Tokenizer implements IterableIterator<Token> {
         }
     }
 
-    private match(text: string, pattern: Pattern): { match: string; groups: string[] } {
+    private match(
+        text: string,
+        pattern: Pattern
+    ): { match: string; groups: string[] } {
         let result: { match: string; groups: string[] } | undefined;
 
         if (typeof pattern === "function") {
-            const matched = pattern(text)
-        
+            const matched = pattern(text);
+
             result = matched ? { match: matched, groups: [] } : undefined;
         } else if (typeof pattern === "string") {
-            result = text.startsWith(pattern) ? { match: pattern, groups: [] } : undefined;
+            result = text.startsWith(pattern)
+                ? { match: pattern, groups: [] }
+                : undefined;
         } else if (pattern instanceof RegExp) {
             const matched = text.match(pattern);
-            
+
             if (matched && matched.index === 0)
                 result = {
                     match: matched[0],
