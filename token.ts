@@ -3,6 +3,7 @@ export interface Token {
     type: string;
     match: string;
     groups: string[];
+    value: any;
     position: {
         start: number;
         end: number;

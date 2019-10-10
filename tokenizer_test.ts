@@ -13,6 +13,7 @@ test(function matchesSingleRegex() {
         value: {
             type: "DIGITS",
             match: "0123456789",
+            value: "0123456789",
             groups: [],
             position: { start: 0, end: 10 }
         }
@@ -34,6 +35,7 @@ test(function matchesMultipleRegex() {
         value: {
             type: "DIGITS",
             match: "0123456789",
+            value: "0123456789",
             groups: [],
             position: { start: 0, end: 10 }
         }
@@ -43,6 +45,7 @@ test(function matchesMultipleRegex() {
         value: {
             type: "SPACE",
             match: " ",
+            value: " ",
             groups: [],
             position: { start: 10, end: 11 }
         }
@@ -52,6 +55,7 @@ test(function matchesMultipleRegex() {
         value: {
             type: "DIGITS",
             match: "0123456789",
+            value: "0123456789",
             groups: [],
             position: { start: 11, end: 21 }
         }
@@ -69,6 +73,7 @@ test(function matchesSingleString() {
         value: {
             type: "DIGITS",
             match: "0123456789",
+            value: "0123456789",
             groups: [],
             position: { start: 0, end: 10 }
         }
@@ -90,6 +95,7 @@ test(function matchesMultipleString() {
         value: {
             type: "DIGITS",
             match: "0123456789",
+            value: "0123456789",
             groups: [],
             position: { start: 0, end: 10 }
         }
@@ -99,6 +105,7 @@ test(function matchesMultipleString() {
         value: {
             type: "SPACE",
             match: " ",
+            value: " ",
             groups: [],
             position: { start: 10, end: 11 }
         }
@@ -108,6 +115,7 @@ test(function matchesMultipleString() {
         value: {
             type: "DIGITS",
             match: "0123456789",
+            value: "0123456789",
             groups: [],
             position: { start: 11, end: 21 }
         }
@@ -146,6 +154,7 @@ test(function matchesSingleFunctionPattern() {
         value: {
             type: "STRING",
             match: '"0123456789 abcdef"',
+            value: '"0123456789 abcdef"',
             groups: [],
             position: { start: 0, end: 19 }
         }
@@ -198,6 +207,7 @@ test(function matchesMultipleFunctionPattern() {
         value: {
             type: "STRING",
             match: '"0123456789 abcdef"',
+            value: '"0123456789 abcdef"',
             groups: [],
             position: { start: 0, end: 19 }
         }
@@ -207,6 +217,7 @@ test(function matchesMultipleFunctionPattern() {
         value: {
             type: "SPACE",
             match: " ",
+            value: " ",
             groups: [],
             position: { start: 19, end: 20 }
         }
@@ -216,6 +227,7 @@ test(function matchesMultipleFunctionPattern() {
         value: {
             type: "STRING",
             match: '"0123456789 abcdef"',
+            value: '"0123456789 abcdef"',
             groups: [],
             position: { start: 20, end: 39 }
         }
@@ -404,18 +416,21 @@ test(function testIterable() {
             {
                 type: "DIGITS",
                 match: "0123456789",
+                value: "0123456789",
                 groups: [],
                 position: { start: 0, end: 10 }
             },
             {
                 type: "SPACE",
                 match: " ",
+                value: " ",
                 groups: [],
                 position: { start: 10, end: 11 }
             },
             {
                 type: "DIGITS",
                 match: "0123456789",
+                value: "0123456789",
                 groups: [],
                 position: { start: 11, end: 21 }
             }

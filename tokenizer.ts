@@ -133,6 +133,11 @@ export class Tokenizer implements IterableIterator<Token> {
                         return {
                             type: rule.type,
                             match: result.match,
+                            value: rule.value
+                                ? typeof rule.value === "function"
+                                    ? rule.value(result)
+                                    : rule.value
+                                : result.match,
                             groups: result.groups,
                             position: {
                                 start: start,

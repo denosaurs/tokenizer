@@ -4,5 +4,6 @@ import { Pattern } from "./pattern.ts";
 export interface Rule {
     type: string;
     pattern: Pattern;
+    value?: ((match: { match: string; groups: string[] }) => any) | any;
     ignore?: boolean;
 }
