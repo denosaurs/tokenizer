@@ -5,10 +5,11 @@ import {
     writeJsonSync
 } from "https://deno.land/std/fs/mod.ts";
 import { Tokenizer } from "../../mod.ts";
+import { Token } from "token";
 
 const source = readFileStrSync("./sample.json");
 
-const tokenizer = new Tokenizer(source, [
+const tokenizer = new Tokenizer([
     { type: "WHITESPACE", pattern: /[ \n\r\t]+/, ignore: true },
     { type: "LBRACE", pattern: "{" },
     { type: "RBRACE", pattern: "}" },
@@ -31,7 +32,7 @@ const tokenizer = new Tokenizer(source, [
     { type: "NULL", pattern: "null", value: null }
 ]);
 
-const result = tokenizer.tokenize();
+const result = tokenizer.tokenize(source);
 
 writeJsonSync("./result.json", result, { spaces: 4 });
 console.log("Done: result.json");
