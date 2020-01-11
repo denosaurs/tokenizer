@@ -152,7 +152,8 @@ export class Tokenizer implements IterableIterator<Token> {
 
     private match(
         text: string,
-        pattern: Pattern
+        pattern: Pattern,
+        increment = true
     ): { match: string; groups: string[] } {
         let result: { match: string; groups: string[] } | undefined;
 
@@ -174,11 +175,13 @@ export class Tokenizer implements IterableIterator<Token> {
                 };
         } else if (pattern instanceof Array) {
             for (const p of pattern) {
-                if ((result = this.match(text, p))) break;
+                result = this.match(text, p, false);
+
+                if (result) break;
             }
         }
 
-        if (result) this._index += result.match.length;
+        if (result && increment) this._index += result.match.length;
         return result;
     }
 

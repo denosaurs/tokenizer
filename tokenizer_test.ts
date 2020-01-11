@@ -437,3 +437,96 @@ test(function testIterable() {
         ]
     );
 });
+
+test(function testMixed() {
+    const tokenizer = new Tokenizer(
+        `123
+        456abc
+        ABCDEF GHIJKL "ABCDEF asdasd" a -1 "hello world"`,
+        [
+            { type: "space", pattern: /\s+/, ignore: true },
+
+            { type: "keywords", pattern: ["ABCDEF", "GHIJKL"] },
+            { type: "identifier", pattern: /[a-zA-Z_]+/ },
+            {
+                type: "integer",
+                pattern: /-?[0-9]+/,
+                value: (m) => parseInt(m.match)
+            },
+            {
+                type: "string",
+                pattern: /"(.*?[^\\])"/,
+                value: (m) => m.groups[0]
+            }
+        ]
+    );
+
+    assertEquals(
+        [...tokenizer],
+        [
+            {
+                type: "integer",
+                match: "123",
+                value: 123,
+                groups: [],
+                position: { start: 0, end: 3 }
+            },
+            {
+                type: "integer",
+                match: "456",
+                value: 456,
+                groups: [],
+                position: { start: 12, end: 15 }
+            },
+            {
+                type: "identifier",
+                match: "abc",
+                value: "abc",
+                groups: [],
+                position: { start: 15, end: 18 }
+            },
+            {
+                type: "keywords",
+                match: "ABCDEF",
+                value: "ABCDEF",
+                groups: [],
+                position: { start: 27, end: 33 }
+            },
+            {
+                type: "keywords",
+                match: "GHIJKL",
+                value: "GHIJKL",
+                groups: [],
+                position: { start: 34, end: 40 }
+            },
+            {
+                type: "string",
+                match: '"ABCDEF asdasd"',
+                value: "ABCDEF asdasd",
+                groups: ["ABCDEF asdasd"],
+                position: { start: 41, end: 56 }
+            },
+            {
+                type: "identifier",
+                match: "a",
+                value: "a",
+                groups: [],
+                position: { start: 57, end: 58 }
+            },
+            {
+                type: "integer",
+                match: "-1",
+                value: -1,
+                groups: [],
+                position: { start: 59, end: 61 }
+            },
+            {
+                type: "string",
+                match: '"hello world"',
+                value: "hello world",
+                groups: ["hello world"],
+                position: { start: 62, end: 75 }
+            }
+        ]
+    );
+});
