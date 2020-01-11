@@ -9,5 +9,5 @@ jobs:
       - uses: denolib/setup-deno@master
         with:
           deno-version: 0.29
-      - run: deno test tokenizer_test.ts
+      - run: deno test -A tokenizer_test.ts
         
