@@ -7,6 +7,6 @@ jobs:
     steps:
     - uses: actions/checkout@master
     - name: test all
-      uses: denolib/deno-action@0.18.0
+      uses: denolib/deno-action@0.29.0
       with:
         args: -A test *_test.ts
