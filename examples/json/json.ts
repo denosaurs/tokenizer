@@ -2,7 +2,7 @@ const { cwd } = Deno;
 
 import {
   readFileStrSync,
-  writeJsonSync
+  writeJsonSync,
 } from "https://deno.land/std/fs/mod.ts";
 import { Tokenizer } from "../../mod.ts";
 import { Token } from "token";
