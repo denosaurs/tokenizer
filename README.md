@@ -1,8 +1,17 @@
-# Tokenizer
-[![Actions Status](https://github.com/eliassjogreen/deno_tokenizer/workflows/Tests/badge.svg)](https://github.com/eliassjogreen/deno_tokenizer/actions)
-[![GitHub license](https://img.shields.io/github/license/eliassjogreen/deno_tokenizer)](https://github.com/eliassjogreen/deno_tokenizer)
+# Tokenizer [![Badge License]][License]
 
-A simple tokenizer for deno.
+*A simple **Deno** library*
+
+---
+
+<div align = center>
+
+[![Badge Status]][Actions]
+
+</div>
+
+---
+
 
 ## Example
 ```TypeScript
@@ -53,3 +62,13 @@ while (!tokenizer.done) {
 - [ ] Line and column information? Or just a helper function to get line and column from index
 - [ ] BNF / EBNF ?
 - [ ] Generate a tokenizer
+
+
+<!----------------------------------------------------------------------------->
+
+[Badge License]: https://img.shields.io/badge/License-MIT-yellow.svg?style=for-the-badge
+[Badge Status]: https://github.com/eliassjogreen/deno_tokenizer/workflows/Tests/badge.svg
+
+
+[Actions]: https://github.com/eliassjogreen/deno_tokenizer/actions
+[License]: LICENSE
