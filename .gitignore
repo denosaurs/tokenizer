@@ -19,3 +19,5 @@ build/
 .vscode
 doc/
 yarn.lock
+
+examples/json/result.json
