@@ -4,6 +4,13 @@ import { Match } from './Match.ts';
 import { Rule } from './Rule.ts';
 
 
+type TokenConsumer = 
+    ( token : Token ) => void;
+    
+type Tokens =
+    Token [];
+
+
 /** Tokenizes given source string into tokens */
 
 export class Tokenizer implements IterableIterator<Token> {
@@ -12,14 +19,17 @@ export class Tokenizer implements IterableIterator<Token> {
 
     /** The string that will be scanned */
     
-    public readonly source: string;
+    public readonly source : string;
     
     /** The rules that tells the Tokenizer what patterns to look for */
     
-    public readonly rules: Rule[];
+    public readonly rules : Rule[];
 
     public unexpectedCharacterError: () => never = () => {
-        throw `Unexpected character: "${ this.source[this.index] }" at index ${ this.index }`;
+        
+        const { index , source } = this;
+        
+        throw `Unexpected character: "${ source[index] }" at index ${ index }`;
     };
 
     /** The current index of the Tokenizer in the source string */
@@ -57,14 +67,15 @@ export class Tokenizer implements IterableIterator<Token> {
 
     /** Tokenizes given string (default is the lexer input) to a Token array */
     
-    public tokenize( source : string, callback : ( token : Token ) => void) : Token[];
-    public tokenize( callback : ( token : Token ) => void ) : Token[];
-    public tokenize( source : string ) : Token[];
-    public tokenize() : Token[];
+    public tokenize( source : string, callback : TokenConsumer ) : Tokens;
+    public tokenize( callback : TokenConsumer ) : Tokens;
+    public tokenize( source : string ) : Tokens;
+    public tokenize() : Tokens;
     
     public tokenize(
-        sourceOrCallback ?: (( token : Token ) => void ) | string,
-        callbackOrNothing ?: ( token : Token ) => void ) : Token[] {
+        sourceOrCallback ?: TokenConsumer | string,
+        callbackOrNothing ?: TokenConsumer
+    ) : Tokens {
     
         let callback = undefined;
         let { source } = this;
@@ -85,6 +96,7 @@ export class Tokenizer implements IterableIterator<Token> {
         const tokens : Token[] = [];
 
         while(!tokenizer.done){
+            
             const { value } = tokenizer.next();
 
             callback?.(value);
@@ -141,39 +153,37 @@ export class Tokenizer implements IterableIterator<Token> {
             
         for(const rule of this.rules){
             
-            const start = this.index;
-            const result = this.match(
-                this.source.substring(this.index),
-                rule.pattern
-            );
+            const { source , index : start } = this;
             
-            const end = this.index;
+            const result = this.match(source.substring(start),rule.pattern);
 
-            if (result) {
+            if(!result)
+                continue;
 
-                if(rule.ignore)
-                    return this.scan();
-                    
-                if(rule.type === '')
-                    return this.scan();
+            const { ignore , type } = rule;
+
+            if(ignore)
+                return this.scan();
                 
-                return {
-                    type: rule.type,
-                    match: result.match,
-                    value: rule.value
-                        ? typeof rule.value === "function"
-                        ? rule.value(result)
-                        : rule.value
-                        : result.match,
-                    groups: result.groups,
-                    position: {
-                        start: start,
-                        end: end,
-                    }
-                }
+            if(type === '')
+                return this.scan();
+            
+            const { groups , match } = result;
+            
+            let value = rule.value ?? match;
+            
+            if(typeof value === 'function')
+                value = value(result);
+            
+            const { index : end } = this;
+
+            return {
+                groups , match , type , value ,
+                position: { start , end }
             }
         }
     }
+    
 
     private match(
         text : string,
@@ -186,33 +196,36 @@ export class Tokenizer implements IterableIterator<Token> {
         const type = typeof pattern;
         
         switch(true){
-        case type === 'function' :
+        case type === 'function' : {
             
-        const matched = (pattern as PatternTester)(text);
-
-            result = matched 
-                ? { match: matched, groups: [] } 
-                : undefined;
+            const match = (pattern as PatternTester)(text);
+        
+            if(match)
+                result = { match , groups : [] };
         
             break;
+        }
         case type === 'string' :
             
-            result = text.startsWith(pattern as string)
-                ? { match: pattern, groups: [] } as Match
-                : undefined;
+            if(text.startsWith(pattern as string))
+                result = { match : pattern , groups : [] } as Match;
         
             break;
         case pattern instanceof RegExp : {
             
             const matched = text.match(pattern as RegExp);
 
-            if(matched?.index === 0)
-                result = {
-                    match : matched[0] ,
-                    groups : matched.length > 1 
-                        ? matched.slice(1) 
-                        : []
-                }
+            if(matched?.index !== 0)
+                break;
+            
+            const [ match ] = matched;
+            
+            let groups : string[] = [];
+            
+            if(matched.length > 1)
+                groups = matched.slice(1) 
+            
+            result = { groups , match };
             
             break;
         }
