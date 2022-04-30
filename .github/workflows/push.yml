@@ -1,12 +1,20 @@
+
 on: push
+
 name: Tests
+
 jobs:
-  testAll:
-    name: test all
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@master
-      - uses: denolib/setup-deno@master
-        with:
-          deno-version: 0.41.0
-      - run: deno test
+    testAll:
+        
+        name: All Unit Tests
+        runs-on: ubuntu-latest
+        
+        steps:
+        
+        - uses: actions/checkout@master
+        
+        - uses: denoland/setup-deno@master
+            with:
+                deno-version: vx.x.x
+        
+        - run: Tools/Test.ts
