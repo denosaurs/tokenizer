@@ -1,3 +1,5 @@
-export { Tokenizer } from "./tokenizer.ts";
-export type { Rule } from "./rule.ts";
-export type { Token } from "./token.ts";
+
+export { Tokenizer } from './Source/Tokenizer.ts';
+export type { Token } from './Source/Token.ts';
+export type { Rule } from './Source/Rule.ts';
+

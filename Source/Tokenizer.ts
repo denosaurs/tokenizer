@@ -1,6 +1,6 @@
-import { Rule } from "./rule.ts";
-import { Token } from "./token.ts";
-import { Pattern } from "./pattern.ts";
+import { Pattern } from './Pattern.ts';
+import { Token } from './Token.ts';
+import { Rule } from './Rule.ts';
 
 /** Tokenizes given source string into tokens */
 export class Tokenizer implements IterableIterator<Token> {

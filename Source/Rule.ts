@@ -1,4 +1,4 @@
-import { Pattern } from "./pattern.ts";
+import { Pattern } from './Pattern.ts';
 
 /** Represents a Rule to be scanned for in the Tokenizer */
 export interface Rule {
