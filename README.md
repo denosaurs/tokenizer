@@ -96,6 +96,20 @@ console.log(tokenizer.tokenize());
  { type: "LINK", match: "[a cool](link)", value: "[a cool](link)", groups: [ "a cool", "link" ], position: { start: 14, end: 28 } } ]
 ```
 
+<br>
+<br>
+
+## Testing
+
+*You can execute the unit tests with:*
+
+```sh
+Tools/Test.ts
+```
+
+<br>
+<br>
+
 ## TODO
 - [x] Custom patterns using functions
 - [x] Add position information to Token
