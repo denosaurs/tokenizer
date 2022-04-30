@@ -1,8 +1,14 @@
-/** Represents a pattern to be scanned for in the Tokenizer */
+
+/**
+ *  Tokenizer Pattern
+ */
+
+
+type PatternTester =
+    ( text : string ) => string | undefined;
+
+
 export type Pattern =
-  | ((text: string) => string | undefined)
-  | ((text: string) => string | undefined)[]
-  | RegExp
-  | RegExp[]
-  | string
-  | string[];
+    | PatternTester [] | PatternTester
+    | RegExp [] | RegExp
+    | string [] | string ;

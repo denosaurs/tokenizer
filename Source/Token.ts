@@ -1,11 +1,27 @@
-/** Represents the Token that will be return on a match when scanning in the Tokenizer */
+
+/**
+ *  Tokenizer Token
+ */
+
+interface Position {
+    
+    start : number ;
+    
+    end : number ;
+    
+}
+
+
 export interface Token {
-  type: string | number;
-  match: string;
-  groups: string[];
-  value: any;
-  position: {
-    start: number;
-    end: number;
-  };
+    
+    position : Position ;
+    
+    groups : string [];
+    
+    match : string;
+    
+    value : any;
+    
+    type : string | number;
+
 }

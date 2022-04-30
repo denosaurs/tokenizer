@@ -1,9 +1,23 @@
 import { Pattern } from './Pattern.ts';
+import { Match } from './Match.ts';
 
-/** Represents a Rule to be scanned for in the Tokenizer */
+
+type MatchProcessor = 
+    ( match : Match ) => any;
+
+
+/**
+ *  Tokenizer Rule
+ */
+
 export interface Rule {
-  type: string | number;
-  pattern: Pattern;
-  value?: ((match: { match: string; groups: string[] }) => any) | any;
-  ignore?: boolean;
+    
+    pattern : Pattern;
+
+    ignore ?: boolean;
+    
+    value ?: MatchProcessor | any;
+
+    type : string | number;
+    
 }
