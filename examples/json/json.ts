@@ -1,13 +1,8 @@
-const { cwd } = Deno;
+const { cwd , readFileSync , writeFileSync } = Deno;
 
-import {
-  readFileStrSync,
-  writeJsonSync,
-} from "https://deno.land/std/fs/mod.ts";
-import { Tokenizer } from "../../mod.ts";
-import { Token } from "token";
+import { Tokenizer , Token } from "../../mod.ts";
 
-const source = readFileStrSync("./sample.json");
+const source = new TextDecoder().decode(readFileSync("examples/json/sample.json"));
 
 const tokenizer = new Tokenizer([
   { type: "WHITESPACE", pattern: /[ \n\r\t]+/, ignore: true },
@@ -20,12 +15,12 @@ const tokenizer = new Tokenizer([
   {
     type: "NUMBER",
     pattern: /-?(?:[0-9]|[1-9][0-9]+)(?:\.[0-9]+)?(?:[eE][-+]?[0-9]+)?\b/,
-    value: (m) => Number.parseFloat(m.match),
+    value: (m : any) => Number.parseFloat(m.match),
   },
   {
     type: "STRING",
     pattern: /"(?:\\["bfnrt\/\\]|\\u[a-fA-F0-9]{4}|[^"\\])*"/,
-    value: (m) => m.match.slice(1, -1),
+    value: (m : any) => m.match.slice(1, -1),
   },
   { type: "TRUE", pattern: "true", value: true },
   { type: "FALSE", pattern: "false", value: false },
@@ -34,5 +29,7 @@ const tokenizer = new Tokenizer([
 
 const result = tokenizer.tokenize(source);
 
-writeJsonSync("./result.json", result, { spaces: 4 });
+const json = JSON.stringify(result,null,4);
+
+writeFileSync("examples/json/result.json",new TextEncoder().encode(json));
 console.log("Done: result.json");
