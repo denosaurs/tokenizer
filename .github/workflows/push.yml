@@ -13,7 +13,7 @@ jobs:
         
         -   uses: actions/checkout@master
         
-        -   uses: denoland/setup-deno@master
+        -   uses: denoland/setup-deno@v1
             with:
                 deno-version: vx.x.x
         
