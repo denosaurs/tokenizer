@@ -11,10 +11,10 @@ jobs:
         
         steps:
         
-        - uses: actions/checkout@master
+        -   uses: actions/checkout@master
         
-        - uses: denoland/setup-deno@master
+        -   uses: denoland/setup-deno@master
             with:
                 deno-version: vx.x.x
         
-        - run: Tools/Test.ts
+        -   run: Tools/Test.ts
