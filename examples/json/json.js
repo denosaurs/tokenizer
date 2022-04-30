@@ -1,8 +1,9 @@
 #!/usr/bin/env -S deno run --allow-read --allow-write
 
+import { join , dirname , fromFileUrl } from 'https://deno.land/std/path/mod.ts'
 import { Tokenizer } from '../../mod.ts';
 
-const { cwd , readTextFile , writeTextFile } = Deno;
+const { readTextFile , writeTextFile } = Deno;
 const { stringify } = JSON;
 const { log } = console;
 
@@ -14,8 +15,8 @@ const
 
 
 const 
-    sampleFile = `examples/json/sample.json` ,
-    resultFile = `examples/json/result.json` ;
+    sampleFile = join(cwd(),'sample.json'),
+    resultFile = join(cwd(),'result.json');
 
 
 const rules = [
@@ -54,4 +55,8 @@ function toString({ match }){
 
 function toNumber({ match }){
     return Number.parseFloat(match);
+}
+
+function cwd(){
+    return dirname(fromFileUrl(import.meta.url));
 }
