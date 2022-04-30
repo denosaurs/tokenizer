@@ -4,7 +4,7 @@
  */
 
 
-type PatternTester =
+export type PatternTester =
     ( text : string ) => string | undefined;
 
 
