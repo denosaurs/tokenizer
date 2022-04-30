@@ -1,6 +1,8 @@
-const { cwd , readFileSync , writeFileSync } = Deno;
+#!/usr/bin/env -S deno run --allow-read --allow-write
 
 import { Tokenizer , Token } from "../../mod.ts";
+const { cwd , readFileSync , writeFileSync } = Deno;
+
 
 const source = new TextDecoder().decode(readFileSync("examples/json/sample.json"));
 
