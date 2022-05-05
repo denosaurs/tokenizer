@@ -1,4 +1,4 @@
-import { assertEquals } from "https://deno.land/std/testing/asserts.ts";
+import { assertEquals } from "https://deno.land/std@0.137.0/testing/asserts.ts";
 
 import { Tokenizer } from "./mod.ts";
 
@@ -457,6 +457,7 @@ test(function testMixed() {
       {
         type: "string",
         pattern: /"(.*?[^\\])"/,
+        // deno-lint-ignore no-explicit-any
         value: (m: { groups: any[] }) => m.groups[0],
       },
     ],

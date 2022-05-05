@@ -3,6 +3,7 @@ export interface Token {
   type: string | number;
   match: string;
   groups: string[];
+  // deno-lint-ignore no-explicit-any
   value: any;
   position: {
     start: number;

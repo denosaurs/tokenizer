@@ -4,24 +4,26 @@ import { Pattern } from "./pattern.ts";
 
 /** Tokenizes given source string into tokens */
 export class Tokenizer implements IterableIterator<Token> {
-  private _index = 0;
+  #index = 0;
 
   /** The string that will be scanned */
-  public readonly source: string;
+  readonly source: string;
   /** The rules that tells the Tokenizer what patterns to look for */
-  public readonly rules: Rule[];
+  readonly rules: Rule[];
 
-  public unexpectedCharacterError: () => never = () => {
-    throw `Unexpected character: "${this.source[this.index]}" at index ${this.index}`;
+  unexpectedCharacterError: () => never = () => {
+    throw `Unexpected character: "${
+      this.source[this.index]
+    }" at index ${this.index}`;
   };
 
   /** The current index of the Tokenizer in the source string */
-  public get index(): number {
-    return this._index;
+  get index(): number {
+    return this.#index;
   }
 
   /** Checks if the Tokenizer is done scanning the source string */
-  public get done(): boolean {
+  get done(): boolean {
     return !(this.index < this.source.length);
   }
 
@@ -31,24 +33,23 @@ export class Tokenizer implements IterableIterator<Token> {
   constructor(sourceOrRules: string | Rule[], rulesOrNothing?: Rule[]) {
     if (typeof sourceOrRules === "string") {
       this.source = sourceOrRules;
-
-      if (rulesOrNothing) {
-        this.rules = rulesOrNothing;
-      } else {
-        this.rules = [];
-      }
+      this.rules = rulesOrNothing || [];
     } else {
       this.source = "";
       this.rules = sourceOrRules;
     }
   }
+  /** Add a rule to the Tokenizer */
+  addRule(rule: Rule): void {
+    this.rules.push(rule);
+  }
 
   /** Tokenizes given string (default is the lexer input) to a Token array */
-  public tokenize(): Token[];
-  public tokenize(source: string): Token[];
-  public tokenize(source: string, callback: (token: Token) => void): Token[];
-  public tokenize(callback: (token: Token) => void): Token[];
-  public tokenize(
+  tokenize(): Token[];
+  tokenize(source: string): Token[];
+  tokenize(source: string, callback: (token: Token) => void): Token[];
+  tokenize(callback: (token: Token) => void): Token[];
+  tokenize(
     sourceOrCallback?: ((token: Token) => void) | string,
     callbackOrNothing?: (token: Token) => void,
   ): Token[] {
@@ -84,12 +85,11 @@ export class Tokenizer implements IterableIterator<Token> {
   }
 
   /** Resets the index of the Tokenizer */
-  public reset(): void {
-    this._index = 0;
+  reset(): void {
+    this.#index = 0;
   }
-
   /** Returns the next scanned Token */
-  public next(): IteratorResult<Token> {
+  next(): IteratorResult<Token> {
     if (this.done) {
       return {
         done: true,
@@ -97,7 +97,7 @@ export class Tokenizer implements IterableIterator<Token> {
       };
     }
 
-    const token = this.scan();
+    const token = this.#scan();
 
     if (token) {
       return {
@@ -116,43 +116,33 @@ export class Tokenizer implements IterableIterator<Token> {
     this.unexpectedCharacterError();
   }
 
-  private scan(): Token | undefined {
-    if (this.done) {
-      return;
-    } else {
-      for (const rule of this.rules) {
-        const start = this.index;
-        const result = this.match(
-          this.source.substring(this.index),
-          rule.pattern,
-        );
-        const end = this.index;
-
-        if (result) {
-          if (rule.ignore || rule.type === "") {
-            return this.scan();
-          } else {
-            return {
-              type: rule.type,
-              match: result.match,
-              value: rule.value
-                ? typeof rule.value === "function"
-                  ? rule.value(result)
-                  : rule.value
-                : result.match,
-              groups: result.groups,
-              position: {
-                start: start,
-                end: end,
-              },
-            };
-          }
-        }
+  #scan(): Token | undefined {
+    if (this.done) return;
+    for (const rule of this.rules) {
+      const start = this.index;
+      const result = this.#match(
+        this.source.substring(this.index),
+        rule.pattern,
+      );
+      const end = this.index;
+      if (result) {
+        return rule.ignore || rule.type === "" ? this.#scan() : {
+          type: rule.type,
+          match: result.match,
+          value: rule.value
+            ? typeof rule.value === "function" ? rule.value(result) : rule.value
+            : result.match,
+          groups: result.groups,
+          position: {
+            start: start,
+            end: end,
+          },
+        };
       }
     }
   }
 
-  private match(
+  #match(
     text: string,
     pattern: Pattern,
     increment = true,
@@ -178,13 +168,13 @@ export class Tokenizer implements IterableIterator<Token> {
       }
     } else if (pattern instanceof Array) {
       for (const p of pattern) {
-        result = this.match(text, p, false);
+        result = this.#match(text, p, false);
 
         if (result) break;
       }
     }
 
-    if (result && increment) this._index += result.match.length;
+    if (result && increment) this.#index += result.match.length;
     return result;
   }
 
