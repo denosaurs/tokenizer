@@ -1,8 +1,10 @@
-const { cwd , readFileSync , writeFileSync } = Deno;
+const { readFileSync, writeFileSync } = Deno;
 
-import { Tokenizer , Token } from "../../mod.ts";
+import { Tokenizer } from "../../mod.ts";
 
-const source = new TextDecoder().decode(readFileSync("examples/json/sample.json"));
+const source = new TextDecoder().decode(
+  readFileSync("examples/json/sample.json"),
+);
 
 const tokenizer = new Tokenizer([
   { type: "WHITESPACE", pattern: /[ \n\r\t]+/, ignore: true },
@@ -15,12 +17,14 @@ const tokenizer = new Tokenizer([
   {
     type: "NUMBER",
     pattern: /-?(?:[0-9]|[1-9][0-9]+)(?:\.[0-9]+)?(?:[eE][-+]?[0-9]+)?\b/,
-    value: (m : any) => Number.parseFloat(m.match),
+    // deno-lint-ignore no-explicit-any
+    value: (m: any) => Number.parseFloat(m.match),
   },
   {
     type: "STRING",
     pattern: /"(?:\\["bfnrt\/\\]|\\u[a-fA-F0-9]{4}|[^"\\])*"/,
-    value: (m : any) => m.match.slice(1, -1),
+    // deno-lint-ignore no-explicit-any
+    value: (m: any) => m.match.slice(1, -1),
   },
   { type: "TRUE", pattern: "true", value: true },
   { type: "FALSE", pattern: "false", value: false },
@@ -29,7 +33,7 @@ const tokenizer = new Tokenizer([
 
 const result = tokenizer.tokenize(source);
 
-const json = JSON.stringify(result,null,4);
+const json = JSON.stringify(result, null, 4);
 
-writeFileSync("examples/json/result.json",new TextEncoder().encode(json));
+writeFileSync("examples/json/result.json", new TextEncoder().encode(json));
 console.log("Done: result.json");
